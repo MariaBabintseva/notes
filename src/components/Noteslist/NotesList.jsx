@@ -26,7 +26,7 @@ export const NotesList = () => {
                 tabPosition={'left'}
                 type="card"
                 style={{ height: 'calc(100vh - 64px)' }}
-                items={notesList?.map((item) => {
+                items={notesList?.sort((a, b) => b.created_at - a.created_at).map((item) => {
 
                     return {
                         label: <ListItem item={item} />,

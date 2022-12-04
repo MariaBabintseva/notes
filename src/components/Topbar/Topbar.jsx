@@ -5,21 +5,31 @@ import './Topbar.css'
 import { addNote } from "../../services/notes";
 import { RemoveModal } from "../RemoveModal";
 import { useContext, useState } from "react";
-import { SelectedNoteContext } from "../../services/context";
+import { EditContext, SelectedNoteContext } from "../../services/context";
 
-export const Topbar = () => {
+export const Topbar = ({ searchValue, setSearchValue }) => {
     const { selectedNote, setSelectedNote } = useContext(SelectedNoteContext)
+    const { edit, setEdit } = useContext(EditContext)
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const addHandler = () => {
         addNote()
             .then(id => {
                 setSelectedNote(id)
+                setEdit(true)
             })
     }
 
     const removeHandler = () => {
         setIsModalOpen(true)
+    }
+
+    const editHandler = () => {
+        setEdit(true)
+    }
+
+    const searchHandler = (e) => {
+        setSearchValue(e.target.value)
     }
 
     return (
@@ -51,10 +61,12 @@ export const Topbar = () => {
                         type="primary"
                         icon={<EditOutlined />}
                         size={'default'}
+                        onClick={editHandler}
                     >
                         Редактировать
                     </Button>
                     <Input
+                        onChange={searchHandler}
                         prefix={<SearchOutlined />}
                         placeholder="Поиск заметок..."
                     />

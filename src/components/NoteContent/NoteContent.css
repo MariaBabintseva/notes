@@ -16,3 +16,7 @@
 .text-content {
     font-size: 18px;
 }
+
+.ant-tabs-tabpane {
+    padding: 16px !important;
+}

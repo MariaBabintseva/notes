@@ -4,31 +4,33 @@ import { Topbar } from './components/Topbar/Topbar';
 import { NotesList } from './components/Noteslist/NotesList';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from './services/db';
-import { NotesContext, SelectedNoteContext } from './services/context';
+import { EditContext, NotesContext, SelectedNoteContext } from './services/context';
 import { useEffect, useState } from 'react';
 
 function App() {
+  const [searchValue, setSearchValue] = useState('')
+
   const notes = useLiveQuery(
-    () => db.notes.toArray()
+    () => db.notes.where("title")
+      .startsWithIgnoreCase(searchValue)
+      .toArray(),
+    [searchValue]
   );
 
   const [selectedNote, setSelectedNote] = useState(null)
-
-  /*   useEffect(() => {
-      if (notes) {
-        setSelectedNote(notes.length > 0 ? notes[0].id : null)
-      }
-    }, [notes]) */
+  const [edit, setEdit] = useState(false)
 
 
   return (
     <NotesContext.Provider value={notes}>
       <SelectedNoteContext.Provider value={{ selectedNote, setSelectedNote }}>
-        <Layout>
-          <Topbar />
-          {notes &&
-            <NotesList />}
-        </Layout>
+        <EditContext.Provider value={{ edit, setEdit }}>
+          <Layout>
+            <Topbar searchValue={searchValue} setSearchValue={setSearchValue} />
+            {notes &&
+              <NotesList />}
+          </Layout>
+        </EditContext.Provider>
       </SelectedNoteContext.Provider>
     </NotesContext.Provider>
 

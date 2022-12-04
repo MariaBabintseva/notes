@@ -1,5 +1,15 @@
 import { db } from "./db";
 
+export const searchNotes = async (searchValue) => {
+    const notes = await db.notes
+        .where('title')
+        .startsWithIgnoreCase(searchValue)
+        .toArray();
+
+    return notes
+}
+
+
 export const addNote = async () => {
     try {
         const id = await db.notes.add({
@@ -15,4 +25,8 @@ export const addNote = async () => {
 
 export const removeNote = async (note) => {
     await db.notes.delete(note)
+}
+
+export const editNote = async (note, changes) => {
+    await db.notes.update(note, changes)
 }
