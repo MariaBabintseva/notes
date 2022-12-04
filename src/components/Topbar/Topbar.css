@@ -1,0 +1,9 @@
+.header .ant-space {
+    width: 100%;
+    padding: 0 16px;
+}
+
+.header .ant-space-item:last-child {
+    margin-left: auto;
+    width: 300px;
+}

@@ -1,0 +1,18 @@
+.note-content {
+    padding: 24px;
+}
+
+.date-content {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 16px;
+    color: #8c8c8c;
+}
+
+.title-content {
+    font-size: 24px;
+}
+
+.text-content {
+    font-size: 18px;
+}

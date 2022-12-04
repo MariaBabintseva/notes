@@ -1,0 +1,25 @@
+.list-item {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+}
+
+.list-item span {
+    line-height: 24px;
+}
+
+.text-item {
+    font-size: 16px;
+    display: flex;
+    color: #8c8c8c;
+}
+
+.title-item {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.date-item {
+    font-weight: 500;
+    color: #000000;
+}
