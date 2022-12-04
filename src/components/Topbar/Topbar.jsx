@@ -2,8 +2,26 @@ import { Button, Input, Space } from "antd"
 import { Header } from "antd/es/layout/layout"
 import { DeleteOutlined, EditOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import './Topbar.css'
+import { addNote } from "../../services/notes";
+import { RemoveModal } from "../RemoveModal";
+import { useContext, useState } from "react";
+import { SelectedNoteContext } from "../../services/context";
 
 export const Topbar = () => {
+    const { selectedNote, setSelectedNote } = useContext(SelectedNoteContext)
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const addHandler = () => {
+        addNote()
+            .then(id => {
+                setSelectedNote(id)
+            })
+    }
+
+    const removeHandler = () => {
+        setIsModalOpen(true)
+    }
+
     return (
         <>
             <Header
@@ -17,6 +35,7 @@ export const Topbar = () => {
                         type="primary"
                         icon={<PlusOutlined />}
                         size={'default'}
+                        onClick={addHandler}
                     >
                         Новая заметка
                     </Button>
@@ -24,6 +43,7 @@ export const Topbar = () => {
                         type="primary"
                         icon={<DeleteOutlined />}
                         size={'default'}
+                        onClick={removeHandler}
                     >
                         Удалить
                     </Button>
@@ -39,9 +59,8 @@ export const Topbar = () => {
                         placeholder="Поиск заметок..."
                     />
                 </Space>
-
-
             </Header>
+            <RemoveModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
         </>
     )
 }
