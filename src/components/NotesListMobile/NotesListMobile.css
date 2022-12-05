@@ -1,0 +1,17 @@
+.ant-list-item {
+    cursor: pointer;
+}
+
+.notes-list_mobile {
+    display: none;
+}
+
+.ant-list-item:hover .title-item {
+    color: #4096ff;
+}
+
+@media screen and (max-width: 768px) {
+    .notes-list_mobile {
+        display: block;
+    }
+}

@@ -7,3 +7,9 @@
     margin-left: auto;
     width: 300px;
 }
+
+@media screen and (max-width: 768px) {
+    .header button span.label-btn {
+        display: none;
+    }
+}

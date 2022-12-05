@@ -1,0 +1,17 @@
+.content-mobile {
+    display: none;
+    padding: 16px;
+    position: relative;
+    height: calc(100vh - 64px);
+}
+
+
+.btn-back {
+    margin-bottom: 7px;
+}
+
+@media screen and (max-width: 768px) {
+    .content-mobile {
+        display: block;
+    }
+}

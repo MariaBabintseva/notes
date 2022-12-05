@@ -1,11 +1,12 @@
 import { Modal } from "antd"
 import { useContext } from "react";
-import { NotesContext, SelectedNoteContext } from "../services/context";
+import { ContentMobileContext, NotesContext, SelectedNoteContext } from "../services/context";
 import { removeNote } from "../services/notes";
 
 export const RemoveModal = ({ isModalOpen, setIsModalOpen }) => {
     const notesList = useContext(NotesContext)
     const { selectedNote, setSelectedNote } = useContext(SelectedNoteContext)
+    const { contentMobile, setContentMobile } = useContext(ContentMobileContext)
 
     const handleOk = () => {
         setIsModalOpen(false);
@@ -18,6 +19,8 @@ export const RemoveModal = ({ isModalOpen, setIsModalOpen }) => {
             const { key } = newNotes[targetIndex === newNotes.length ? targetIndex - 1 : targetIndex];
             setSelectedNote(key);
         }
+
+        setContentMobile(false)
     };
 
     const handleCancel = () => {

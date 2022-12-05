@@ -4,7 +4,7 @@ import './ListItem.css'
 
 export const ListItem = ({ item }) => {
     return (
-        <div className="list-item" >
+        <div className="list-item">
             <span className='title-item'>{item.title}</span>
             <div className='text-item' >
                 <Space>

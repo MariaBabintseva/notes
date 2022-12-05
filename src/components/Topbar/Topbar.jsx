@@ -5,18 +5,20 @@ import './Topbar.css'
 import { addNote } from "../../services/notes";
 import { RemoveModal } from "../RemoveModal";
 import { useContext, useState } from "react";
-import { EditContext, SelectedNoteContext } from "../../services/context";
+import { ContentMobileContext, EditContext, SelectedNoteContext } from "../../services/context";
 
 export const Topbar = ({ searchValue, setSearchValue }) => {
     const { selectedNote, setSelectedNote } = useContext(SelectedNoteContext)
     const { edit, setEdit } = useContext(EditContext)
+    const { contentMobile, setContentMobile } = useContext(ContentMobileContext)
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const addHandler = () => {
         addNote()
-            .then(id => {
+            .then((id) => {
                 setSelectedNote(id)
                 setEdit(true)
+                setContentMobile(true)
             })
     }
 
@@ -47,7 +49,9 @@ export const Topbar = ({ searchValue, setSearchValue }) => {
                         size={'default'}
                         onClick={addHandler}
                     >
-                        Новая заметка
+                        <span className="label-btn">
+                            Новая заметка
+                        </span>
                     </Button>
                     <Button
                         type="primary"
@@ -55,7 +59,9 @@ export const Topbar = ({ searchValue, setSearchValue }) => {
                         size={'default'}
                         onClick={removeHandler}
                     >
-                        Удалить
+                        <span className="label-btn">
+                            Удалить
+                        </span>
                     </Button>
                     <Button
                         type="primary"
@@ -63,9 +69,12 @@ export const Topbar = ({ searchValue, setSearchValue }) => {
                         size={'default'}
                         onClick={editHandler}
                     >
-                        Редактировать
+                        <span className="label-btn">
+                            Редактировать
+                        </span>
                     </Button>
                     <Input
+                        value={searchValue}
                         onChange={searchHandler}
                         prefix={<SearchOutlined />}
                         placeholder="Поиск заметок..."
